@@ -10,8 +10,10 @@ const fs = require('fs');
 const { Sequelize, DataTypes, Op } = require('sequelize');
 
 let sequelize = null;
+let callbackURL = '/oauth/callback';
 
 if (process.env.HEROKU) {
+  callbackURL = 'http://weareallstatera.herokuapp.com/oauth/callback';
   sequelize = new Sequelize(process.env.DATABASE_URL)
 }
 else {
@@ -90,7 +92,7 @@ var appClient = new Twit({
 passport.use(new Strategy({
     consumerKey: process.env['TWITTER_CONSUMER_KEY'],
     consumerSecret: process.env['TWITTER_CONSUMER_SECRET'],
-    callbackURL: '/oauth/callback',
+    callbackURL: callbackURL,
     proxy: trustProxy
   },
   async (token, tokenSecret, profile, cb) => {
