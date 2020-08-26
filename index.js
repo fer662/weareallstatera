@@ -56,7 +56,7 @@ function addTwitterClient(user) {
 
 function removeTwitterClient(user) {
   console.log(`removeTwitterClient: ${user.twitterId}`);
-  const index = clients.findIndex((u) => {
+  const index = twitterClients.findIndex((u) => {
     u.twitterId == user.twitterId;
   })
   if (index !== undefined) {
