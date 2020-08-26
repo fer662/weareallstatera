@@ -1,0 +1,14 @@
+{
+  "name": "#WeAreAllStatera",
+  "description": "#WeAreAllStatera",
+  "repository": "https://github.com/fer662/weareallstatera",
+  "keywords": [ "twitter", "login", "statera" ],
+  "env": {
+    "TWITTER_CONSUMER_KEY": {
+      "description": "A string used to identify this app with Twitter."
+    },
+    "TWITTER_CONSUMER_SECRET": {
+      "description": "A secret used to authenticate this app with Twitter."
+    }
+  }
+}
