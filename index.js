@@ -98,7 +98,7 @@ passport.use(new Strategy({
 }));
 
 passport.serializeUser( async (userData, cb) => {
-  console.log(`serialize: ${JSON.stringify(userData)}`);
+  //console.log(`serialize: ${JSON.stringify(userData)}`);
   let user = await User.findOne({
     where: {
       twitterId: {
