@@ -230,7 +230,7 @@ class WeAreAllStatera {
   }
 
   private pendingTweetsForUser(user: any): Promise<any[]> {
-    return sequelize.query(`SELECT t.twitterId, t.id FROM Tweets AS t WHERE t.id NOT IN (SELECT ul.TweetId FROM userLikes AS ul WHERE ul.UserId = ${user.id})`, { type: sequelize.QueryTypes.SELECT});
+    return sequelize.query(`SELECT t."twitterId", t."id" FROM "Tweets" AS t WHERE t."id" NOT IN (SELECT ul."TweetId" FROM "userLikes" AS ul WHERE ul."UserId" = ${user.id})`, { type: sequelize.QueryTypes.SELECT});
   }
 
   private userLikedTweet(user: any, tweet: any): Promise<any> {
