@@ -116,7 +116,7 @@ class WeAreAllStatera {
         res.redirect('/');
       });
     });
-    app.listen(8081);    
+    app.listen(process.env['PORT'] || 8080);    
     this.app = app;
   }
 
