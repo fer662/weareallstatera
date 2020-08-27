@@ -1,6 +1,69 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<audio src="beep.wav" id="beep" autostart="false"></audio>
 
+<script>
+
+function setCookie(name, value, days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
+function handleClick(cb) {
+  setCookie('notificationsEnabled', cb.checked);
+}
+
+function getNotificationEnabled() {
+  if (getCookie('notificationsEnabled')) {
+    return getCookie('notificationsEnabled')
+  }
+  return true;
+}
+
+// request permission on page load
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById("notificationsSwitch")) {
+    console.log("Found it: " + getCookie('notificationsEnabled'));
+    document.getElementById("notificationsSwitch").checked = getNotificationEnabled();
+
+
+    window.setTimeout(window.location.reload.bind(window.location), 10000);
+    if (<%= pendingTweets %> > 10) {
+      notifyMe();
+    }
+
+  }
+  function notifyMe() {
+    const lastNotifyDate = getCookie('lastNotifyDate');
+    const threshold = 30 * 1000;
+    if (lastNotifyDate === undefined || (new Date().getTime() - lastNotifyDate) > threshold && getNotificationEnabled()) {
+      document.getElementById('beep').play();
+      setCookie('lastNotifyDate', new Date().getTime());
+    }
+    else {
+      console.log('Skipping notification');
+    }
+  }
+
+
+});
+</script>
 <div class="container">
   
   <br />
@@ -22,6 +85,11 @@
 <% if (user) { %>
   <hr class="my-4">
   <p>You have <%= pendingTweets %> pending tweets to like. You have already liked <%= likedTweets %>.</p>
+
+  <div class="custom-control custom-switch">
+    <input type="checkbox" class="custom-control-input" id="notificationsSwitch" checked="" onclick='handleClick(this);'>
+    <label class="custom-control-label" for="notificationsSwitch">Notify me when I have more than 10 pending likes (soft, short sound every 30 secs)</label>
+  </div>
 
   <p class="lead">
     <a href="/like" class="btn btn-primary btn-lg" href="#" role="button">Like them now!</a>
