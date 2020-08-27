@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const passport = require('passport');
 const Strategy = require('passport-twitter').Strategy;
-const TwitterStream = require('twitter-stream-api');
 const Twit = require('twit');
 const fs = require('fs');
 const session = require('express-session');
@@ -112,6 +111,7 @@ class WeAreAllStatera {
   }
 
   private setupTweetStream() {
+    console.log("Twitter stream initializing");
     this.tweetStream = this.appClient.stream('statuses/filter', { track: '#WeAreAllStatera' })
 
     this.tweetStream.on('tweet', async (t) => {
@@ -127,6 +127,14 @@ class WeAreAllStatera {
         await tweet.save();
         console.log(`Tweet with id ${t.id_str}`);
       }
+    });
+
+    this.tweetStream.on('disconnect', function (disconnectMessage) {
+      console.log("Twitter stream disconnected");
+      this.tweetStream = null;
+      setTimeout(() => {
+        this.setupTweetStream();
+      }, 5000);
     })
   }
 
