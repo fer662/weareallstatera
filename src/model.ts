@@ -3,14 +3,34 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 let sequelize = null;
 
-if (process.env.HEROKU) {
-  sequelize = new Sequelize(process.env.DATABASE_URL)
+if (process.env.HEROKU || true) {
+  const URL = require('url'); 
+  const parseURL = (databaseURL) => {
+    let URLObj = URL.parse(databaseURL);
+    let [username, password] = URLObj.auth.split(':');
+    return {
+      username,
+      password,
+      host: URLObj.hostname,
+      port: URLObj.port,
+      database: URLObj.path.split('/')[1],
+      dialect: 'postgres',
+    };
+  };
+
+  sequelize = new Sequelize(Object.assign(
+    {dialectOptions: {ssl: {
+      require: true,
+      rejectUnauthorized: false 
+    }}, logging: console.log},
+    parseURL(process.env.DATABASE_URL)
+  ));
 }
 else {
   sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: 'database.sqlite',
-    logging: false
+    logging: true
   });
 }
 

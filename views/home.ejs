@@ -1,8 +1,33 @@
-<% if (!user) { %>
-  <p>Welcome! Please <a href="/login">log in</a>.</p>
-<% } else { %>
-  <p>Hello, <%= user.name %>. <a href="/logout">logout</a>.</p>
-  <p>You have <%= pendingTweets %> pending tweets to like</p><a href="/like">Like them now</a>
-<% } %>
-<p>Liking #WeAreAllStatera with the force of <%= twitterClients %> users</p>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
+<div class="container">
+  
+  <br />
+  
+  <div class="jumbotron">
+
+
+  <h1 class="display-3">#WeAreAllStatera</h1>
+
+<% if (!user) { %>
+  <p>Welcome! Please <a href="/login/twitter">log in</a>.</p>
+<% } else { %>
+  <p class="lead"><p>Hello, <%= user.name %>. <a href="/logout">logout</a>.</p></p>
+<% } %>
+
+
+  <p>Liking #WeAreAllStatera with the force of <%= twitterClients %> users</p>
+<% if (user) { %>
+  <hr class="my-4">
+  <p>You have <%= pendingTweets %> pending tweets to like</p>
+
+  <p class="lead">
+    <a href="/like" class="btn btn-primary btn-lg" href="#" role="button">Like them now</a>
+  </p>
+<% } %>  
+</div>
+  
+  <br />
+  
+</div>

@@ -83,11 +83,6 @@ class WeAreAllStatera {
       res.render('home', { user: req.user, pendingTweets: pendingTweets, twitterClients: users.length });
     });
 
-    app.get('/login', async (req, res) => {
-      const users = await Tweet.findAll();
-      res.render('login', { twitterClients: users.length });
-    });
-
     app.get('/like', async (req, res) =>{
       await this.likeAllPendingTweetsForUser(req.user);
       res.redirect('/');
@@ -99,12 +94,6 @@ class WeAreAllStatera {
       passport.authenticate('twitter', { failureRedirect: '/login' }),
       function(req, res) {
         res.redirect('/');
-    });
-
-    app.get('/profile',
-      require('connect-ensure-login').ensureLoggedIn(),
-      function(req, res){
-        res.render('profile', { user: req.user });
     });
 
     app.get('/logout', async (req, res) =>{
