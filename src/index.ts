@@ -112,7 +112,7 @@ class WeAreAllStatera {
 
   private setupTweetStream() {
     console.log("Twitter stream initializing");
-    this.tweetStream = this.appClient.stream('statuses/filter', { track: '#WeAreAllStatera' })
+    this.tweetStream = this.appClient.stream('statuses/filter', { track: '#WeAreAllStatera,$STA' })
 
     this.tweetStream.on('tweet', async (t) => {
       let tweet = await Tweet.findOne({
