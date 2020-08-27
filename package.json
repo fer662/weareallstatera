@@ -9,17 +9,14 @@
   ],
   "author": "Jared Hanson",
   "license": "Unlicense",
-  "homepage": "https://github.com/passport/express-4.x-twitter-example",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/passport/express-4.x-twitter-example.git"
-  },
-  "bugs": {
-    "url": "https://github.com/passport/express-4.x-twitter-example/issues"
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "build": "tsc"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-ensure-login": "^0.1.1",
+    "connect-redis": "^5.0.0",
     "dotenv": "^8.0.0",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
@@ -28,10 +25,15 @@
     "passport": "^0.4.0",
     "passport-twitter": "^1.0.4",
     "pg": "^8.3.2",
+    "promised-twit": "^0.1.0",
+    "redis": "^3.0.2",
     "sequelize": "^6.3.4",
     "sqlite3": "^5.0.0",
     "twit": "^2.2.11",
     "twitter": "^1.7.1",
     "twitter-stream-api": "^0.5.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.2"
   }
 }
