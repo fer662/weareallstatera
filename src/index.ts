@@ -205,7 +205,7 @@ class WeAreAllStatera {
       try {
         console.log(`${user.twitterId} liking ${tweet.twitterId}`);
         return new Promise((resolve, reject) => {
-          twitterClient.post('favorites/create', { id: tweet.id_str }, (error, data, response) => {
+          twitterClient.post('favorites/create', { id: tweet.twitterId }, (error, data, response) => {
             if (error) {
               console.log(`Error liking tweet ${tweet.id_str}: ${error}`)
               reject(error);
