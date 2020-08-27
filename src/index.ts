@@ -75,12 +75,14 @@ class WeAreAllStatera {
     
     app.get('/', async (req, res) => {
       let pendingTweets;
+      let likedTweetsCount;
+      let totalLikedTweetsCount = (await this.totalLikedTweetsCount());
       if (req.user) {
         pendingTweets = (await this.pendingTweetsForUser(req.user)).length;
-        console.log(pendingTweets);
+        likedTweetsCount = (await this.likedTweetsCountForUser(req.user));
       }
       const users = await User.findAll();
-      res.render('home', { user: req.user, pendingTweets: pendingTweets, twitterClients: users.length });
+      res.render('home', { user: req.user, pendingTweets: pendingTweets, likedTweets: likedTweetsCount, totalLikedTweets: totalLikedTweetsCount, twitterClients: users.length });
     });
 
     app.get('/like', async (req, res) =>{
@@ -216,6 +218,20 @@ class WeAreAllStatera {
     });
 
     await Promise.all(likePromises);
+  }
+
+  private likedTweetsCountForUser(user: any): Promise<number> {
+    return UserLikes.count({
+      where: {
+        UserId: {
+          [Op.eq]: user.id
+        }
+      }
+    });
+  }
+
+  private totalLikedTweetsCount(): Promise<number> {
+    return UserLikes.count();
   }
 
   private pendingTweetsForUser(user: any): Promise<any[]> {

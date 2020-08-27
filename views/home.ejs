@@ -18,12 +18,13 @@
 
 
   <p>Liking #WeAreAllStatera with the force of <%= twitterClients %> users</p>
+  <p><%= totalLikedTweets %> total likes so far</p>
 <% if (user) { %>
   <hr class="my-4">
-  <p>You have <%= pendingTweets %> pending tweets to like</p>
+  <p>You have <%= pendingTweets %> pending tweets to like. You have already liked <%= likedTweets %>.</p>
 
   <p class="lead">
-    <a href="/like" class="btn btn-primary btn-lg" href="#" role="button">Like them now</a>
+    <a href="/like" class="btn btn-primary btn-lg" href="#" role="button">Like them now!</a>
   </p>
 <% } %>  
 </div>
