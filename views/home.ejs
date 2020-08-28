@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     window.setTimeout(window.location.reload.bind(window.location), 10000);
-    if (<%= pendingTweets.length %>> 10) {
+    if (<%= pendingTweets %> && <%= pendingTweets.length %>> 10) {
       notifyMe();
     }
 
