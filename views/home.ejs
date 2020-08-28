@@ -39,8 +39,8 @@ function getNotificationEnabled() {
 // request permission on page load
 document.addEventListener('DOMContentLoaded', function() {
   if (window.location.protocol != "https:") {
-    window.location.protocol = "https:";
-    window.location.reload();
+    //window.location.protocol = "https:";
+    //window.location.reload();
     return;
   }
   if (document.getElementById("notificationsSwitch")) {
