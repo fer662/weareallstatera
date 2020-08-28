@@ -43,18 +43,11 @@ function getNotificationEnabled() {
 
 // request permission on page load
 document.addEventListener('DOMContentLoaded', function() {
-  if (window.location.protocol != "https:") {
-    //window.location.protocol = "https:";
-    //window.location.reload();
-    return;
-  }
+  window.setTimeout(window.location.reload.bind(window.location), 60 * 1000);
   if (document.getElementById("notificationsSwitch")) {
-    console.log("Found it: " + getCookie('notificationsEnabled'));
     document.getElementById("notificationsSwitch").checked = getNotificationEnabled();
-
-
-    window.setTimeout(window.location.reload.bind(window.location), 10000);
-    if (<%= pendingTweets %> && <%= pendingTweets.length %>> 10) {
+    
+    if (<%= pendingTweets.length %>> 10) {
       notifyMe();
     }
 

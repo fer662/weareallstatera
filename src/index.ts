@@ -262,6 +262,28 @@ class WeAreAllStatera {
       strictSSL: true,
     })
   }
+
+/*
+  private queryForTweetsManually() {
+    this.appClient.get('search/tweets', { q: '#WeAreAllStatera since:2020-08-28', count: 100 }, function(err, data, response) {
+      console.log(data.statuses)
+      data.statuses.forEach(async (t) => {
+        let tweet = await Tweet.findOne({
+          where: {
+            twitterId: {
+              [Op.eq]: t.id_str
+            }
+          }
+        });
+        if (!tweet) {
+          tweet = Tweet.build({ twitterId: t.id_str, text: t.text, userScreenName: t.user.screen_name });
+          await tweet.save();
+          console.log(`Tweet with id ${t.id_str} from ${t.user.screen_name}: ${t.text}`);
+        }
+      })
+    })
+  }
+*/
 }
 
 const weAreAllStatera = new WeAreAllStatera();
