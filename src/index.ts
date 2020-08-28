@@ -67,7 +67,7 @@ class WeAreAllStatera {
       secret: process.env['SESSION_SECRET'],
       resave: true,
       saveUninitialized: true,
-      cookie : {secure : true},
+      cookie : { secure : true, maxAge: 30 * 24 * 60 * 60 * 1000},
     }));
 
     // Initialize Passport and restore authentication state, if any, from the
