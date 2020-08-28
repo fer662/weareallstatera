@@ -22,7 +22,7 @@ if (process.env.HEROKU || true) {
     {dialectOptions: {ssl: {
       require: true,
       rejectUnauthorized: false 
-    }}, logging: console.log},
+    }}, logging: false },
     parseURL(process.env.DATABASE_URL)
   ));
 }
