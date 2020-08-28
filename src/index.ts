@@ -41,7 +41,7 @@ class WeAreAllStatera {
 
     await setupDatabase();
     this.setupPassport();
-    //his.setupTweetStream();
+    his.setupTweetStream();
     this.setupRoutes();
   }
 
