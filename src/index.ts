@@ -124,9 +124,9 @@ class WeAreAllStatera {
         }
       });
       if (!tweet) {
-        tweet = Tweet.build({ twitterId: t.id_str });
+        tweet = Tweet.build({ twitterId: t.id_str, text: t.text, userScreenName: t.user.screen_name });
         await tweet.save();
-        console.log(`Tweet with id ${t.id_str}`);
+        console.log(`Tweet with id ${t.id_str} from ${t.user.screen_name}: ${t.text}`);
       }
     });
 

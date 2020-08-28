@@ -39,6 +39,14 @@ const Tweet = sequelize.define('Tweet', {
   twitterId: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  text: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  userScreenName: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 }, {
 });
