@@ -1,5 +1,10 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <audio src="beep.wav" id="beep" autostart="false"></audio>
 
 <script>
@@ -49,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     window.setTimeout(window.location.reload.bind(window.location), 10000);
-    if (<%= pendingTweets %> > 10) {
+    if (<%= pendingTweets.length %>> 10) {
       notifyMe();
     }
 
@@ -69,6 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 </script>
+</head>
+<body>
 <div class="container">
   
   <br />
@@ -89,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <p><%= totalLikedTweets %> total likes so far</p>
 <% if (user) { %>
   <hr class="my-4">
-  <p>You have <%= pendingTweets %> pending tweets to like. You have already liked <%= likedTweets %>.</p>
+  <p>You have <%= pendingTweets.length %> pending tweets to like. You have already liked <%= likedTweets %>.</p>
 
   <div class="custom-control custom-switch">
     <input type="checkbox" class="custom-control-input" id="notificationsSwitch" checked="" onclick='handleClick(this);'>
@@ -99,9 +106,25 @@ document.addEventListener('DOMContentLoaded', function() {
   <p class="lead">
     <a href="/like" class="btn btn-primary btn-lg" href="#" role="button">Like them now!</a>
   </p>
+
+<% } %>
+</div> 
+<% if (user) { %>
+  <% if (pendingTweets.length > 0) { %>
+  <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="collapse" data-target="#tweets">Toggle</button> -->
+  <h1 class="display-1">Pending tweets</h1>
+  <% } %>  
+  <div class="container" id="tweets">
+<ul class="list-group">
+  <% for (var i=0; i < pendingTweets.length; i++) {%>
+  <li class="list-group-item"><%= pendingTweets[i].userScreenName %>: <%= pendingTweets[i].text %> </p>
+  <% } %>
+</ul>
+  </div>
 <% } %>  
-</div>
-  
   <br />
   
 </div>
+
+</body>
+</html>

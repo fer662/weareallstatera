@@ -41,7 +41,7 @@ class WeAreAllStatera {
 
     await setupDatabase();
     this.setupPassport();
-    this.setupTweetStream();
+    //his.setupTweetStream();
     this.setupRoutes();
   }
 
@@ -78,7 +78,7 @@ class WeAreAllStatera {
       let likedTweetsCount;
       let totalLikedTweetsCount = (await this.totalLikedTweetsCount());
       if (req.user) {
-        pendingTweets = (await this.pendingTweetsForUser(req.user)).length;
+        pendingTweets = (await this.pendingTweetsForUser(req.user));
         likedTweetsCount = (await this.likedTweetsCountForUser(req.user));
       }
       const users = await User.findAll();
@@ -244,7 +244,7 @@ class WeAreAllStatera {
   }
 
   private pendingTweetsForUser(user: any): Promise<any[]> {
-    return sequelize.query(`SELECT t."twitterId", t."id" FROM "Tweets" AS t WHERE t."id" NOT IN (SELECT ul."TweetId" FROM "userLikes" AS ul WHERE ul."UserId" = ${user.id})`, { type: sequelize.QueryTypes.SELECT});
+    return sequelize.query(`SELECT t."twitterId", t."id", t."text", t."userScreenName" FROM "Tweets" AS t WHERE t."id" NOT IN (SELECT ul."TweetId" FROM "userLikes" AS ul WHERE ul."UserId" = ${user.id})`, { type: sequelize.QueryTypes.SELECT});
   }
 
   private userLikedTweet(user: any, tweet: any): Promise<any> {
