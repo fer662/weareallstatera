@@ -74,7 +74,7 @@ class WeAreAllStatera {
     // session.
     
     app.get('/', async (req, res) => {
-      let pendingTweets;
+      let pendingTweets = [];
       let likedTweetsCount;
       let totalLikedTweetsCount = (await this.totalLikedTweetsCount());
       if (req.user) {
