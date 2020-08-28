@@ -1,14 +1,14 @@
 {
-  "name": "express-4.x-twitter-example",
+  "name": "weareallstatera",
   "version": "0.0.0",
-  "description": "Express 4.x app using Passport for authentication with Twitter.",
+  "description": "#WeAreAllStatera Twitter helper",
   "keywords": [
     "example",
     "express",
     "passport"
   ],
-  "author": "Jared Hanson",
-  "license": "Unlicense",
+  "author": "fer662",
+  "license": "MIT",
   "scripts": {
     "start": "npm run build && node dist/index.js",
     "build": "tsc"
